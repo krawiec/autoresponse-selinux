@@ -1,0 +1,15 @@
+module autoresponse 1.0.0;
+
+require {
+        type postfix_pipe_t;
+        class file { create unlink open write getattr };
+        class dir { add_name create write unlink search };
+}
+
+#============= autoresponse_spool_t ==============
+type autoresponse_spool_t;
+files_type(autoresponse_spool_t)
+
+#============= postfix_pipe_t ==============
+allow postfix_pipe_t autoresponse_spool_t:dir { write create add_name unlink search };
+allow postfix_pipe_t autoresponse_spool_t:file { create unlink open write getattr };
